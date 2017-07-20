@@ -121,7 +121,6 @@ export default {
     beforeMount() {
         this.abbreviate = abbreviate;
         this.prettyMs = prettyMs;
-        console.log(abbreviate(3.21232132, 1));
     }
 }
 </script>
@@ -184,10 +183,13 @@ export default {
 
     .cell-k {
         font-weight: bold;
-        min-width: 52px;
+        width: 52px;
         padding: 1px 8px;
         padding-left: 0;
         border-right: 1px solid #f1f1f1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .cell-v {
