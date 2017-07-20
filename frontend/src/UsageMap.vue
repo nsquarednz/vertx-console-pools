@@ -6,6 +6,7 @@
         <div class="legend">
             <div class="square" :class="usedSquareClass"/> {{ used }} Used
             <div class="square avail"/> {{ avail }} Available
+            <div class="ratio">{{ Math.round(this.ratio * 100) }}%</div>
         </div>
     </div>
 </template>
@@ -24,11 +25,13 @@ export default {
         empty() {
             return this.largest - this.max;
         },
+        ratio() {
+            return this.used / this.max;
+        },
         usedSquareClass() {
-            const ratio = this.used / this.max;
-            if (ratio > 0.6) {
+            if (this.ratio > 0.6) {
                 return 'used-hot';
-            } else if (ratio > 0.33) {
+            } else if (this.ratio > 0.33) {
                 return 'used-warm';
             } else {
                 return 'used';
@@ -90,6 +93,11 @@ export default {
         &:last-child {
             margin-left: 8px;
         }
+    }
+
+    .ratio {
+        float: right;
+        font-weight: bold;
     }
 }
 </style>
