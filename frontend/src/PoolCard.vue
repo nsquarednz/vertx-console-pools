@@ -7,6 +7,8 @@
                     <div class="pool-type">{{ pool.type.toUpperCase() }}</div>
                 </div>
                 <usage-map :used="pool.inUse" :max="pool.maxSize" :largest="greatestSize" :queued="pool.queueSize" />
+                <div class="pf-card-separator" />
+    
             </div>
         </div>
     </div>
@@ -40,5 +42,24 @@ export default {
 .pool-name,
 .pool-type {
     display: inline-block;
+}
+
+.card-pf {
+    padding: 0;
+    border-left: none;
+    border-right: none;
+}
+
+.card-pf-body {
+    margin-top: 15px;
+    &>* {
+        margin: 0 15px;
+    }
+}
+
+.card-pf-body .pf-card-separator {
+    height: 1px;
+    background: #e1e1e1;
+    margin: 15px 0;    
 }
 </style>

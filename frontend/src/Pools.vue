@@ -1,4 +1,3 @@
-
 <template>
     <div class="container-fluid">
         <div class="page-header">
