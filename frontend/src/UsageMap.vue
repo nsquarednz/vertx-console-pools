@@ -46,11 +46,16 @@ export default {
 }
 
 .square {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     display: inline-block;
     margin-right: 2px;
     transition: background 0.15s;
+
+    @media (min-width: 1600px) {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .used {
