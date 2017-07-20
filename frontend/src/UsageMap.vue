@@ -45,21 +45,21 @@ export default {
 <style lang="scss" scoped>
 .usage-map {
     width: 100%;
-    margin: 10px 0;
+    margin: 15px 0;
     line-height: 12px;
     display: block;
 }
 
 .square {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     margin-right: 2px;
     transition: background 0.15s;
 
     @media (min-width: 1600px) {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
     }
 }
 
