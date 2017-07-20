@@ -168,7 +168,7 @@ export default {
 
     .card-pf-title {
         font-size: 14px;
-        margin: 5px 0 5px;
+        margin: 5px 0 7px;
     }
 }
 
@@ -179,17 +179,19 @@ export default {
 }
 
 .details-table {
-    margin-top: 2px;
+    border-top: 1px solid #f1f1f1;
+    width: 80%;
 
     .cell-k {
         font-weight: bold;
         min-width: 47px;
-        padding-right: 6px;
+        padding: 1px 8px;
+        padding-left: 0;
         border-right: 1px solid #f1f1f1;
     }
 
     .cell-v {
-        padding-left: 6px;
+        padding: 1px 8px;
     }
 }
 </style>
