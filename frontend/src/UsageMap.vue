@@ -6,7 +6,7 @@
         <div class="legend">
             <div class="square" :class="usedSquareClass"/> {{ used }} Used
             <div class="square avail"/> {{ avail }} Available
-            <div class="queue">{{ queued }} queued</div>
+            <div class="queue">{{ queued }} Queued</div>
         </div>
     </div>
 </template>

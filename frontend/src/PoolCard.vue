@@ -11,14 +11,93 @@
                 <div class="pf-card-separator" />
                 <div class="row rates">
                     <div class="col-sm-12 col-md-6 rate-col">
-                        <h2 class="card-pf-title">Usage</h2>
-    
-                        {{ pool.usage }}
+                        <h2 class="card-pf-title">Tasks Run</h2>
+                        <table class="details-table" style="display: inline-block;">
+                            <tbody>
+                                <tr>
+                                    <td class="cell-k">Mean</td>
+                                    <td class="cell-v">{{ abbreviate(pool.usage.meanRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">1 min</td>
+                                    <td class="cell-v">{{ abbreviate(pool.usage.oneMinuteRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">5 min</td>
+                                    <td class="cell-v">{{ abbreviate(pool.usage.fiveMinuteRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">15 min</td>
+                                    <td class="cell-v">{{ abbreviate(pool.usage.fifteenMinuteRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="card-pf-title">Exec Time</h2>
+                        <table class="details-table">
+                            <tbody>
+                                <tr>
+                                    <td class="cell-k">Mean</td>
+                                    <td class="cell-v">{{ prettyMs(pool.usage.mean) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">50th</td>
+                                    <td class="cell-v">{{ prettyMs(pool.usage.median) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">95th</td>
+                                    <td class="cell-v">{{ prettyMs(pool.usage['95%']) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">99th</td>
+                                    <td class="cell-v">{{ prettyMs(pool.usage['99%']) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="col-sm-12 col-md-6 rate-col">
-                        <h2 class="card-pf-title">Queue Delay</h2>
+                        <h2 class="card-pf-title">Queue adds</h2>
+                        <table class="details-table" style="display: inline-block;">
+                            <tbody>
+                                <tr>
+                                    <td class="cell-k">Mean</td>
+                                    <td class="cell-v">{{ abbreviate(pool.queueDelay.meanRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">1 min</td>
+                                    <td class="cell-v">{{ abbreviate(pool.queueDelay.oneMinuteRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">5 min</td>
+                                    <td class="cell-v">{{ abbreviate(pool.queueDelay.fiveMinuteRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">15 min</td>
+                                    <td class="cell-v">{{ abbreviate(pool.queueDelay.fifteenMinuteRate.toFixed(2), 1) }}/s</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 class="card-pf-title">Wait Time</h2>
+                        <table class="details-table" style="display: inline-block;">
+                            <tbody>
+                                <tr>
+                                    <td class="cell-k">Mean</td>
+                                    <td class="cell-v">{{ prettyMs(pool.queueDelay.mean) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">50th</td>
+                                    <td class="cell-v">{{ prettyMs(pool.queueDelay.median) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">95th</td>
+                                    <td class="cell-v">{{ prettyMs(pool.queueDelay['95%']) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cell-k">99th</td>
+                                    <td class="cell-v">{{ prettyMs(pool.queueDelay['99%']) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
     
-                        {{ pool.queueDelay }}
                     </div>
                 </div>
             </div>
@@ -27,6 +106,8 @@
 </template>
 
 <script>
+import abbreviate from 'number-abbreviate';
+import prettyMs from 'pretty-ms';
 import UsageMap from './UsageMap.vue';
 
 export default {
@@ -36,6 +117,11 @@ export default {
     },
     components: {
         'usage-map': UsageMap
+    },
+    beforeMount() {
+        this.abbreviate = abbreviate;
+        this.prettyMs = prettyMs;
+        console.log(abbreviate(3.21232132, 1));
     }
 }
 </script>
@@ -82,7 +168,7 @@ export default {
 
     .card-pf-title {
         font-size: 14px;
-        margin: 0 0 5px;
+        margin: 5px 0 5px;
     }
 }
 
@@ -90,5 +176,20 @@ export default {
     height: 1px;
     background: #e1e1e1;
     margin: 15px 0;
+}
+
+.details-table {
+    margin-top: 2px;
+
+    .cell-k {
+        font-weight: bold;
+        min-width: 47px;
+        padding-right: 6px;
+        border-right: 1px solid #f1f1f1;
+    }
+
+    .cell-v {
+        padding-left: 6px;
+    }
 }
 </style>
