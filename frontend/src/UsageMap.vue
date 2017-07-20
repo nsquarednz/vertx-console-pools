@@ -90,7 +90,7 @@ export default {
         width: 10px;
         margin: 0;
 
-        &:last-child {
+        &.avail {
             margin-left: 8px;
         }
     }
