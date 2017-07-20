@@ -1,6 +1,9 @@
 <template>
-    <div class="usage-map">
-        <div class="square" :class="usedSquareClass" v-for="n in used" :key="n" /><div class="square avail" v-for="n in avail" :key="n" /><div class="square empty" v-for="n in empty" :key="n" />
+    <div>
+        <div class="usage-map">
+            <div class="square" :class="usedSquareClass" v-for="n in used" :key="n" /><div class="square avail" v-for="n in avail" :key="n" /><div class="square empty" v-for="n in empty" :key="n" />
+        </div>
+        <div class="legend"></div>
     </div>
 </template>
 
@@ -44,6 +47,7 @@ export default {
     height: 20px;
     display: inline-block;
     margin-right: 2px;
+    transition: background 0.15s;
 }
 
 .used {
