@@ -4,14 +4,14 @@
         <div class="page-header">
             <h1>Pool Statistics</h1>
         </div>
-        <pool-card v-for="name in poolNames" :key="name" :name="name" :poolStats="poolStats" />
+        <pool-card v-for="pool in basicPoolData" :key="pool.name" :pool="pool" :greatestSize="greatestSize" />
     </div>
 </template>
 
 <script>
 import PoolCard from './PoolCard.vue';
 
-const prefix = 'vertx.pools.worker.';
+const prefix = 'vertx.pools.';
 
 export default {
     name: 'Pool Statistics',
@@ -20,7 +20,7 @@ export default {
     },
     data() {
         return {
-            poolStats: {},
+            poolStats: {}
         }
     },
     computed: {
@@ -34,15 +34,43 @@ export default {
             }
             return names.sort();
         },
-        maxPoolSize() {
+        greatestSize() {
             let maxSize = 0;
             for (let name of this.poolNames) {
-                let size = this.getPoolProperty(name, 'max-pool-size').value;
-                if (size > maxSize) {
-                    maxSize = size;
+                let size = this.getPoolProperty(name, 'max-pool-size');
+                if (size && size.value > maxSize) {
+                    maxSize = size.value;
                 }
             }
             return maxSize;
+        },
+        basicPoolData() {
+            const pools = [];
+            for (let name of this.poolNames) {
+                const dotIndex = name.indexOf('.');
+                const type = name.substring(0, dotIndex);
+                const id = name.substring(dotIndex + 1, name.length);
+
+                let maxSizeProp = this.getPoolProperty(name, 'max-pool-size');
+                let maxSize = undefined;
+                let poolRatio = undefined;
+                if (maxSizeProp) {
+                    maxSize = maxSizeProp.value;
+                    poolRatio = this.getPoolProperty(name, 'pool-ratio');
+                }
+                pools.push({
+                    name: id,
+                    type: type,
+                    fullName: name,
+                    maxSize: maxSize,
+                    poolRatio: poolRatio.value,
+                    inUse: this.getPoolProperty(name, 'in-use').count,
+                    usage: this.getPoolProperty(name, 'usage'),
+                    queueSize: this.getPoolProperty(name, 'queue-size').count,
+                    queueDelay: this.getPoolProperty(name, 'queue-delay')
+                })
+            }
+            return pools;
         }
     },
     methods: {
