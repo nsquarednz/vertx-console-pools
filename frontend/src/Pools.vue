@@ -4,14 +4,20 @@
         <div class="page-header">
             <h1>Pool Statistics</h1>
         </div>
-        {{ poolNames }}
+        <pool-card v-for="name in poolNames" :key="name" :name="name" :poolStats="poolStats" />
     </div>
 </template>
 
 <script>
+import PoolCard from './PoolCard.vue';
+
+const prefix = 'vertx.pools.worker.';
 
 export default {
     name: 'Pool Statistics',
+    components: {
+        'pool-card': PoolCard
+    },
     data() {
         return {
             poolStats: {},
@@ -19,7 +25,6 @@ export default {
     },
     computed: {
         poolNames() {
-            const prefix = 'vertx.pools.worker.';
             const suffix = '.usage'
             const names = [];
             for (let key of Object.keys(this.poolStats)) {
@@ -27,7 +32,22 @@ export default {
                     names.push(key.substring(prefix.length, key.length - suffix.length));
                 }
             }
-            return names;
+            return names.sort();
+        },
+        maxPoolSize() {
+            let maxSize = 0;
+            for (let name of this.poolNames) {
+                let size = this.getPoolProperty(name, 'max-pool-size').value;
+                if (size > maxSize) {
+                    maxSize = size;
+                }
+            }
+            return maxSize;
+        }
+    },
+    methods: {
+        getPoolProperty(name, prop) {
+            return this.poolStats[prefix + name + '.' + prop];
         }
     },
     beforeMount() {
