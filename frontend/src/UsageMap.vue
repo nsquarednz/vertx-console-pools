@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="usage-map">
-            <div class="square" :class="usedSquareClass" v-for="n in used" :key="n" /><div class="square avail" v-for="n in avail" :key="n" /><div class="square empty" v-for="n in empty" :key="n" />
+            <div class="square" :class="usedSquareClass" v-for="n in used" :key="n" /><div class="square avail" v-for="o in avail" :key="used + o" /><div class="square empty" v-for="p in empty" :key="max + p" />
         </div>
         <div class="legend">
             <div class="square" :class="usedSquareClass"/> {{ used }} Used
