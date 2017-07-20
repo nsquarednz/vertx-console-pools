@@ -184,7 +184,7 @@ export default {
 
     .cell-k {
         font-weight: bold;
-        min-width: 47px;
+        min-width: 52px;
         padding: 1px 8px;
         padding-left: 0;
         border-right: 1px solid #f1f1f1;
