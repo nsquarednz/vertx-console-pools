@@ -6,10 +6,17 @@
                     <h2 class="card-pf-title pool-name">{{ pool.name }}</h2>
                     <div class="pool-type">{{ pool.type.toUpperCase() }}</div>
                 </div>
-                <div class="pf-card-separator" />    
-                <usage-map :used="pool.inUse" :max="pool.maxSize" :largest="greatestSize" :queued="pool.queueSize" />
                 <div class="pf-card-separator" />
-    
+                <usage-map class="usage" :used="pool.inUse" :max="pool.maxSize" :largest="greatestSize" :queued="pool.queueSize" />
+                <div class="pf-card-separator" />
+                <div class="row rates">
+                    <div class="col-sm-12 col-md-6 rate-col">
+                        {{ pool.usage }}
+                    </div>
+                    <div class="col-sm-12 col-md-6 rate-col">
+                        {{ pool.queueDelay }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,8 +60,20 @@ export default {
 
 .card-pf-body {
     margin-top: 15px;
-    &>* {
+    .data-row,
+    .usage,
+    .rates {
         margin: 0 15px;
+    }
+}
+
+.rates {
+    .rate-col {
+        padding: 0;
+
+        &:last-child {
+            padding-left: 5px;
+        }
     }
 }
 
