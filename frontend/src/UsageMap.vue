@@ -6,7 +6,7 @@
         <div class="legend">
             <div class="square" :class="usedSquareClass"/> {{ used }} Used
             <div class="square avail"/> {{ avail }} Available
-            <div class="ratio">{{ Math.round(this.ratio * 100) }}%</div>
+            <div class="queue">{{ queued }} queued</div>
         </div>
     </div>
 </template>
@@ -16,7 +16,8 @@ export default {
     props: {
         used: Number,
         max: Number,
-        largest: Number
+        largest: Number,
+        queued: Number
     },
     computed: {
         avail() {
@@ -46,6 +47,7 @@ export default {
     width: 100%;
     margin: 10px 0;
     line-height: 12px;
+    display: block;
 }
 
 .square {
@@ -95,7 +97,7 @@ export default {
         }
     }
 
-    .ratio {
+    .queue {
         float: right;
         font-weight: bold;
     }

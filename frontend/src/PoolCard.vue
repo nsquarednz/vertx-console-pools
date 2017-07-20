@@ -6,7 +6,7 @@
                     <h2 class="card-pf-title pool-name">{{ pool.name }}</h2>
                     <div class="pool-type">{{ pool.type.toUpperCase() }}</div>
                 </div>
-                <usage-map :used="pool.inUse" :max="pool.maxSize" :largest="greatestSize" />
+                <usage-map :used="pool.inUse" :max="pool.maxSize" :largest="greatestSize" :queued="pool.queueSize" />
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .pool-name {
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
 }
 
