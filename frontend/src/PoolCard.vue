@@ -11,9 +11,13 @@
                 <div class="pf-card-separator" />
                 <div class="row rates">
                     <div class="col-sm-12 col-md-6 rate-col">
+                        <h2 class="card-pf-title">Usage</h2>
+    
                         {{ pool.usage }}
                     </div>
                     <div class="col-sm-12 col-md-6 rate-col">
+                        <h2 class="card-pf-title">Queue Delay</h2>
+    
                         {{ pool.queueDelay }}
                     </div>
                 </div>
@@ -74,6 +78,11 @@ export default {
         &:last-child {
             padding-left: 5px;
         }
+    }
+
+    .card-pf-title {
+        font-size: 14px;
+        margin: 0 0 5px;
     }
 }
 
