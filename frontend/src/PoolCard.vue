@@ -55,7 +55,7 @@
                         </table>
                     </div>
                     <div class="col-sm-12 col-md-6 rate-col">
-                        <h2 class="card-pf-title">Queue adds</h2>
+                        <h2 class="card-pf-title">Queue Adds</h2>
                         <table class="details-table" style="display: inline-block;">
                             <tbody>
                                 <tr>
