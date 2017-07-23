@@ -3,7 +3,7 @@
         <div class="page-header">
             <h1>Pool Statistics</h1>
         </div>
-        <pool-card v-for="pool in basicPoolData" :key="pool.name" :pool="pool" :greatestSize="greatestSize" />
+        <pool-card v-for="pool in basicPoolData" :key="pool.fullName" :pool="pool" :greatestSize="greatestSize" />
     </div>
 </template>
 
