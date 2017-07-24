@@ -79,7 +79,7 @@ export default {
     },
     beforeMount() {
         const updateData = () => this.$http.get(window.location.pathname + '/pools')
-            .then(response => response.json())
+            .then(response => response.data)
             .then(stats => this.poolStats = stats);
         updateData();
         this.updateTask = setInterval(updateData, 1000);
