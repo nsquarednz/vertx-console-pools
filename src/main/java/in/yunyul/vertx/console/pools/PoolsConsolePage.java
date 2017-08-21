@@ -11,11 +11,17 @@ public class PoolsConsolePage implements ConsolePage {
 
     private final MetricsService metricsService;
 
+    /**
+     * Creates the pools console page, using the provided metrics service
+     *
+     * @param metricsService the metrics service to retrieve data from
+     * @return the console page
+     */
     public static PoolsConsolePage create(MetricsService metricsService) {
         return new PoolsConsolePage(metricsService);
     }
 
-    public PoolsConsolePage(MetricsService metricsService) {
+    private PoolsConsolePage(MetricsService metricsService) {
         this.metricsService = metricsService;
     }
 
